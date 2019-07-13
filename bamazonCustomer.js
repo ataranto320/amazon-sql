@@ -26,9 +26,14 @@ inquirer
         {
             type: "input",
             name: "userInput",
-            message: "Which item would you like to buy? Type in the id number.",
-            message: "How many units would you like to buy?"
+            message: "Which item would you like to buy? Type in the id number."
         }
+    // .prompt([{
+    //         type: "input",
+    //         name: "userInput",
+    //         message: "How many units would you like to buy?"
+    // }
+    // ])
     ]).then(function(id){
         console.log(id.userInput);
     });
