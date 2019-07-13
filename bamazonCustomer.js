@@ -1,4 +1,5 @@
 var mysql = require("mysql");
+var inquirer = require("inquirer");
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -19,3 +20,14 @@ connection.connect(function(err) {
   console.log("connected as id " + connection.threadId);
   connection.end();
 });
+
+inquirer
+    .prompt([
+        {
+            type: "input",
+            name: "userInput",
+            message: "Which item would you like yo buy? Type in the id number."
+        }
+    ]).then(function(id){
+        console.log(id.userInput);
+    });
