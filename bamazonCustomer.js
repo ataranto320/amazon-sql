@@ -21,22 +21,41 @@ connection.connect(function(err) {
   connection.end();
 });
 
-inquirer
-    .prompt([
+// function runSearch(){
+    inquirer
+        .prompt([
         {
             type: "input",
             name: "userInput",
-            message: "Which item would you like to buy? Type in the id number.",
+            message: "What do you want to do?",
             choices: [
-                1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                "Find item id number",
+                "Find stock quantity."
             ]
         }
-    // .prompt([{
-    //         type: "input",
-    //         name: "userInput",
-    //         message: "How many units would you like to buy?"
-    // }
-    // ])
-    ]).then(function(id){
-        console.log(id.userInput);
+    ]).then(function(answer){
+        switch(answer.action){
+            case "Find item id number":
+                searchId();
+                break;
+
+            case "Find stock quantity":
+                searchStock();
+                break;
+        }
     });
+// }
+
+// inquirer
+//         .prompt([
+//         {
+//             type: "input",
+//             name: "userInput",
+//             message: "Which item would you like to buy? Type in the id number.",
+//             choices: [
+//                 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+//             ]
+//         }
+// ]).then(function(id){
+//     console.log(id.userInput);
+// });
