@@ -46,21 +46,21 @@ function runSearch(){
     });
 }
 
-function searchId(){
-    inquirer
-        .prompt([
-        {
-            type: "input",
-            name: "userInput",
-            message: "Which item would you like to buy? Type in the id number.",
-            // choices: [
-            //     1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-            // ]
-        }
-]).then(function(id){
-    console.log(id.userInput);
-});
-}
+// function searchId(){
+//     inquirer
+//         .prompt([
+//         {
+//             type: "input",
+//             name: "userInput",
+//             message: "Which item would you like to buy? Type in the id number.",
+//             // choices: [
+//             //     1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+//             // ]
+//         }
+// ]).then(function(id){
+//     console.log(id.userInput);
+// });
+// }
 
 function searchId(){
     inquirer 
@@ -71,6 +71,25 @@ function searchId(){
         })
         .then(function(answer){
             var query = "SELECT item_id FROM products"
+            connection.query(query, {userInput: answer.userInput}, function(err, res){
+                if (err) throw err;
+                for (var i = 0; i < res.length; i++){
+                    console.log(userInput)
+                }
+                runSearch();
+            });
+        });
+}
+
+function searchStock(){
+    inquirer 
+        .prompt({
+            type: "input",
+            name: "userInput",
+            message: "How many units of the product would you like?"
+        })
+        .then(function(answer){
+            var query = "SELECT stock_quantity FROM products"
             connection.query(query, {userInput: answer.userInput}, function(err, res){
                 if (err) throw err;
                 for (var i = 0; i < res.length; i++){
