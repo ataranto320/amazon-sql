@@ -46,7 +46,6 @@ function runSearch(){
     });
 }
 
-// function searchId(){
 //     inquirer
 //         .prompt([
 //         {
@@ -60,7 +59,7 @@ function runSearch(){
 // ]).then(function(id){
 //     console.log(id.userInput);
 // });
-// }
+
 
 function searchId(){
     inquirer 
@@ -99,3 +98,7 @@ function searchStock(){
             });
         });
 }
+
+// else {
+//     console.log("Insufficient quantity!")
+// };
