@@ -18,8 +18,12 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
-  connection.end();
+//   connection.end();
+  runSearch();
 });
+
+
+
 
 function runSearch(){
     inquirer
@@ -34,7 +38,8 @@ function runSearch(){
             ]
         }
     ]).then(function(answer){
-        switch(answer.action){
+        console.log(answer.userInput);
+        switch(answer.userInput){
             case "Find item id number":
                 searchId();
                 break;
@@ -69,12 +74,13 @@ function searchId(){
             message: "Which item would you like to buy? Type in the id number."
         })
         .then(function(answer){
-            var query = "SELECT item_id FROM products"
-            connection.query(query, {userInput: answer.userInput}, function(err, res){
+            var query = "SELECT item_id FROM products WHERE ?"
+            connection.query(query, {item_id: answer.userInput}, function(err, res){
                 if (err) throw err;
-                for (var i = 0; i < res.length; i++){
-                    console.log(userInput)
-                }
+                // for (var i = 0; i < res.length; i++){
+                //     // console.log(userInput)
+                console.log(res);
+                // }
                 runSearch();
             });
         });
@@ -88,12 +94,13 @@ function searchStock(){
             message: "How many units of the product would you like?"
         })
         .then(function(answer){
-            var query = "SELECT stock_quantity FROM products"
-            connection.query(query, {userInput: answer.userInput}, function(err, res){
+            var query = "SELECT stock_quantity FROM products WHERE ?"
+            connection.query(query, {stock_quantity: answer.userInput}, function(err, res){
                 if (err) throw err;
-                for (var i = 0; i < res.length; i++){
-                    console.log(userInput)
-                }
+                // for (var i = 0; i < res.length; i++){
+                //     console.log(userInput)
+                // }
+                console.log(res);
                 runSearch();
             });
         });
