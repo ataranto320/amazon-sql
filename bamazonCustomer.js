@@ -86,6 +86,9 @@ function searchId(){
         });
 }
 
+// update statement
+var sql = ["UPDATE products SET completed ? WHERE stock_quantity? "]
+
 function searchStock(){
     inquirer 
         .prompt({
@@ -94,8 +97,8 @@ function searchStock(){
             message: "How many units of the product would you like?"
         })
         .then(function(answer){
-            var query = "SELECT stock_quantity FROM products WHERE ?"
-            connection.query(query, {stock_quantity: answer.userInput}, function(err, res){
+            var query = "UPDATE stock_quantity FROM products WHERE stock_quantity < ?"
+            connection.query(query, {sql, stock_quantity: answer.userInput}, function(err, res){
                 if (err) throw err;
                 // for (var i = 0; i < res.length; i++){
                 //     console.log(userInput)
