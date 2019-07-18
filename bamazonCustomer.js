@@ -87,7 +87,7 @@ function searchId(){
 }
 
 // update statement
-var sql = ["UPDATE products SET completed ? WHERE stock_quantity? "]
+// var sql = ["UPDATE products SET completed ? WHERE stock_quantity? "]
 
 function searchStock(){
     inquirer 
@@ -97,10 +97,10 @@ function searchStock(){
             message: "How many units of the product would you like?"
         })
         .then(function(answer){
-            // var query = "UPDATE stock_quantity FROM products WHERE stock_quantity ?"
-            var query = "UPDATE stock_quantity FROM products WHERE stock_quntity = answer.userInput"
+            var query = "UPDATE products SET stock_quantity = ?"
+            // var query = "UPDATE stock_quantity FROM products WHERE stock_quntity = answer.userInput"
             // var sql = "UPDATE products SET completed ? WHERE stock_quantity ?"
-            connection.query(query, {sql, stock_quantity: answer.userInput}, function(err, res){
+            connection.query(query, [ answer.userInput ], function(err, res){
             // connection.query(query, {"UPDATE stock_quantity FROM products WHERE stock_quantity ?"}, function(err, res){
                 if (err) throw err;
                 // for (var i = 0; i < res.length; i++){
@@ -110,7 +110,7 @@ function searchStock(){
                 runSearch();
             });
         });
-        connection.end();
+        // connection.end();
 }
 
 // else {
