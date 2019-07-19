@@ -128,7 +128,7 @@ function searchStock(){
             });
         });
         // connection.end();
-}
+} 
 
 // else {
 //     console.log("Insufficient quantity!")
