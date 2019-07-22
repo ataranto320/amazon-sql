@@ -1,5 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+require(console.table);
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -108,7 +109,7 @@ function searchStock(){
             var query = "UPDATE products SET stock_quantity = ? WHERE id = ?"
             // var query = "UPDATE stock_quantity FROM products WHERE stock_quntity = answer.userInput"
             // var sql = "UPDATE products SET completed ? WHERE stock_quantity ?"
-            connection.query(query, [ answer.userInput ], {itme_id}, function(err, res){
+            connection.query(query, [ answer.userInput ], function(err, res){
             // connection.query(query, {"UPDATE stock_quantity FROM products WHERE stock_quantity ?"}, function(err, res){
                 if (err) throw err;
                 // for (var i = 0; i < res.length; i++){
