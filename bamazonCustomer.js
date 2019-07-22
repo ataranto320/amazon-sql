@@ -65,6 +65,14 @@ function runSearch(){
 //     console.log(id.userInput);
 // });
 
+// function to load products
+function load(){
+    connection.query("SELECT * FROM products", function(err, res){
+        if (err) throw err;
+        console.table(res);
+    })
+}
+
 
 function searchId(){
     inquirer 
