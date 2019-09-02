@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
   user: "root",
 
   // Your password
-  password: "vodkamysql1",
+  password: "",
   database: "bamazon"
 });
 
@@ -72,6 +72,7 @@ function load(){
     connection.query("SELECT * FROM products", function(err, res){
         if (err) throw err;
         console.table(res);
+        searchId();
     })
 }
 
@@ -87,10 +88,13 @@ function searchId(){
             var query = "SELECT item_id FROM products WHERE ?"
             connection.query(query, {item_id: answer.userInput}, function(err, res){
                 if (err) throw err;
-                // for (var i = 0; i < res.length; i++){
-                //     // console.log(userInput)
+                if (answer) {
+                    searchStock();
+                } else {
+                    console.log("This id number has no value.");
+                }
                 console.log(res);
-                // }
+                
                 runSearch();
             });
         });
