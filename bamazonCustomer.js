@@ -111,39 +111,33 @@ function searchStock(){
             message: "How many units of the product would you like?"
         })
         .then(function(answer){
-            var query = "UPDATE products SET stock_quantity = ? WHERE id = ?"
+            var quantity = parseInt(answer.quantity);
+            // var query = "UPDATE products SET stock_quantity = ? WHERE id = ?"
             // var query = "UPDATE stock_quantity FROM products WHERE stock_quntity = answer.userInput"
             // var sql = "UPDATE products SET completed ? WHERE stock_quantity ?"
-            connection.query(query, [ answer.userInput ], function(err, res){
+            // connection.query(query, [ answer.userInput ], function(err, res){
             // connection.query(query, {"UPDATE stock_quantity FROM products WHERE stock_quantity ?"}, function(err, res){
                 if (err) throw err;
+                if (quantity > answer.stock_quantity) {
+                    console.log("Insufficient quantity.");
+                    runSearch();
+                } else {
+                    purchase(answer, quantity);
+                }
                 // for (var i = 0; i < res.length; i++){
                 //     console.log(userInput)
                 // }
                 console.log(res);
 
-                // var query = connection.query(
-                //     "UPDATE products SET stock_quantity = ? WHERE id = ?",
-                //     [
-                //         {
-                //             quantity: 200
-                //         },
-                //         {
-                //             item_id: 7
-                //         }
-                //     ],
-                //     fucntion(err, res), {
-                //         if (err) {throw err};
-                //         console.log(res);
-                //     }
-                // )
-                
                 runSearch();
             });
-        });
+        };
         // connection.end();
-} 
-
-// else {
-//     console.log("Insufficient quantity!")
-// };
+ function purchase(answer, quantity) {
+     connection.query(
+         "UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?",
+         [quantity, answer.id], fucntion(err, res) {
+            console.log("Purchase fulfilled! " + quantity + " " answer.answer.id)
+         }
+        );
+ }
