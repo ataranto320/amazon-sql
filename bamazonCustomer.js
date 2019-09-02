@@ -24,9 +24,6 @@ connection.connect(function(err) {
   load();
 });
 
-
-
-
 function runSearch(){
     inquirer
         .prompt([
@@ -52,20 +49,6 @@ function runSearch(){
         }
     });
 }
-
-//     inquirer
-//         .prompt([
-//         {
-//             type: "input",
-//             name: "userInput",
-//             message: "Which item would you like to buy? Type in the id number.",
-//             // choices: [
-//             //     1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-//             // ]
-//         }
-// ]).then(function(id){
-//     console.log(id.userInput);
-// });
 
 // function to load products
 function load(){
@@ -111,7 +94,7 @@ function searchStock(){
             message: "How many units of the product would you like?"
         })
         .then(function(answer){
-            var quantity = parseInt(answer.quantity);
+            var quantity = (answer.quantity);
             // var query = "UPDATE products SET stock_quantity = ? WHERE id = ?"
             // var query = "UPDATE stock_quantity FROM products WHERE stock_quntity = answer.userInput"
             // var sql = "UPDATE products SET completed ? WHERE stock_quantity ?"
@@ -142,7 +125,16 @@ function searchStock(){
      )
  };
 
- 
+function checkInv() {
+    for (var i = 0; i < stock_quantity.length; i++) {
+        if (stock_quantity[i].id === answer) {
+            return stock_quantity[i];
+        }
+    }
+    return null;
+}
+
+
         
  
 
