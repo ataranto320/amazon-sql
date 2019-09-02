@@ -68,6 +68,7 @@ function searchId(){
             message: "Which item would you like to buy? Type in the id number."
         })
         .then(function(answer){
+            var answer = checkInv(answer, stock_quantity)
             // var query = "SELECT item_id FROM products WHERE ?"
             // connection.query(query, {item_id: answer.userInput}, function(err, res){
                 if (err) throw err;
