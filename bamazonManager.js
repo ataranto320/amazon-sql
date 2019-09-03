@@ -58,3 +58,11 @@ function managerOptions() {
         });
 };
 
+function lowInv() {
+    connection.query("SELECT * FROM products WHERE stock_quantity <= 3", function(err, res){
+        if (err) throw err;
+        console.log(res);
+        managerList(res);
+    });
+}
+
