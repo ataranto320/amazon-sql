@@ -40,4 +40,21 @@ function managerOptions() {
             choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product"],
             message: "Choose between:"
         })
-}
+        .then(function(answer){
+            switch(answer.choice) {
+                case "View Products for Sale":
+                    managerList();
+                    break;
+                case "View Low Inventory":
+                    lowInv();
+                    break;
+                case "Add to Inventory":
+                    addInv();
+                    break;
+                case "Add New Product":
+                    addNewProduct();
+                    break;
+            }
+        });
+};
+
