@@ -83,3 +83,22 @@ function addInv() {
         });
 }
 
+function promptQuantity() {
+    inquirer
+        .prompt({
+            type: "prompt",
+            name: "quantity",
+            message: "How many do you want to add?"
+        })
+        .then(function(answer){
+             addQuantity(products, stock_quantity);
+        });
+}
+
+addQuantity(product, stock_quantity); {
+    connection.query("UPDATE products SET stock_quantity = ? WHERE id = ?"),
+    function(err, res) {
+        managerList();
+    }
+}
+
