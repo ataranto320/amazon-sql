@@ -74,7 +74,7 @@ function addInv() {
             message: "What is the product you want to add to inventory?"
         })
         .then(function(answer){
-            var product = checkInv(id, stock_quantity);
+            var product = checkInv(item_id, stock_quantity);
             if (product) {
                 promptQuantity(product);
             } else {
@@ -83,22 +83,26 @@ function addInv() {
         });
 }
 
-function promptQuantity() {
-    inquirer
-        .prompt({
-            type: "prompt",
-            name: "quantity",
-            message: "How many do you want to add?"
-        })
-        .then(function(answer){
-             addQuantity(products, stock_quantity);
-        });
-}
+// function promptQuantity() {
+//     inquirer
+//         .prompt({
+//             type: "prompt",
+//             name: "quantity",
+//             message: "How many do you want to add?"
+//         })
+//         .then(function(answer){
+//              addQuantity(products, stock_quantity);
+//         });
+// }
 
-addQuantity(product, stock_quantity); {
-    connection.query("UPDATE products SET stock_quantity = ? WHERE id = ?"),
-    function(err, res) {
-        managerList();
-    }
+// addQuantity(product, stock_quantity); {
+//     connection.query("UPDATE products SET stock_quantity = ? WHERE id = ?"),
+//     function(err, res) {
+//         managerList();
+//     }
+// }
+
+function addNewProduct() {
+    connection.query("INSERT INTO products")
 }
 

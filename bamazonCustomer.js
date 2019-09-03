@@ -121,7 +121,7 @@ function searchStock(){
      connection.query(
          "UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?",
          [quantity, answer.id], fucntion(err, res),
-            console.log("Purchase fulfilled! " + quantity + " " ,answer.answer.id),
+            console.log("Purchase fulfilled! " + quantity + " " ,answer.answer.item_id),
             runSearch()
      )
  };
