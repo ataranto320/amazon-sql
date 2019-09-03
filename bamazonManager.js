@@ -110,5 +110,5 @@ function addNewProduct() {
     };
 }
 
-
+// function for checking inventory
 
