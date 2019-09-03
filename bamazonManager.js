@@ -66,3 +66,20 @@ function lowInv() {
     });
 }
 
+function addInv() {
+    inquirer
+        .prompt({
+            type: "add",
+            name: "input",
+            message: "What is the product you want to add to inventory?"
+        })
+        .then(function(answer){
+            var product = checkInv(id, stock_quantity);
+            if (product) {
+                promptQuantity(product);
+            } else {
+                managerList();
+            }
+        });
+}
+
