@@ -1,6 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
-require(console.table);
+// require(console.table);
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -20,7 +20,7 @@ connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
 //   connection.end();
-  runSearch();
+//   runSearch();
   load();
 });
 
@@ -68,9 +68,10 @@ function searchId(){
             message: "Which item would you like to buy? Type in the id number."
         })
         .then(function(answer){
-            var answer = checkInv(answer, stock_quantity)
-            // var query = "SELECT item_id FROM products WHERE ?"
-            // connection.query(query, {item_id: answer.userInput}, function(err, res){
+            console.log(answer)
+            // var answer = checkInv(answer.stock_quantity)
+            var query = "SELECT stock_quantity FROM products WHERE ?"
+            connection.query(query, {item_id: answer.userInput}, function(err, res){
                 if (err) throw err;
                 if (answer) {
                     searchStock();
@@ -81,8 +82,8 @@ function searchId(){
                 
                 runSearch();
             });
-        };
-
+        });
+    };
 
 // update statement
 // var sql = ["UPDATE products SET completed ? WHERE stock_quantity? "]
@@ -100,7 +101,8 @@ function searchStock(){
             // var query = "UPDATE stock_quantity FROM products WHERE stock_quntity = answer.userInput"
             // var sql = "UPDATE products SET completed ? WHERE stock_quantity ?"
             // connection.query(query, [ answer.userInput ], function(err, res){
-            // connection.query(query, {"UPDATE stock_quantity FROM products WHERE stock_quantity ?"}, function(err, res){
+            var query = "UPDATE stock_quantity FROM products WHERE stock_quantity ?"
+            connection.query(query, {stock_quantity: answer.userInput}, function(err, res){
                 if (err) throw err;
                 if (quantity > answer.stock_quantity) {
                     console.log("Insufficient quantity.");
@@ -115,7 +117,8 @@ function searchStock(){
 
                 runSearch();
             });
-        };
+        });
+}
         // connection.end();
  function purchase(answer, quantity) {
      connection.query(
@@ -126,7 +129,7 @@ function searchStock(){
      )
  };
 
-function checkInv() {
+function checkInv(stock_quantity) {
     for (var i = 0; i < stock_quantity.length; i++) {
         if (stock_quantity[i].id === answer) {
             return stock_quantity[i];
@@ -134,9 +137,5 @@ function checkInv() {
     }
     return null;
 }
-
-
-        
- 
 
 
